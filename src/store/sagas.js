@@ -1,16 +1,21 @@
+import { takeLatest, put, call } from 'redux-saga/effects';
 
 
-import { takeLatest, put } from 'redux-saga/effects';
+function apiGet(text){
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(text + 'da api');
+    }, 2000);
+  });
+}
 
-// function* asyncAddTodo() {
-//   console.log('addTodo');
-//   yield put({ type: 'ADD_TODO', payload: { text: 'Fazer café' } });
-// }
-
-// Aproveitando e trazendo a action para o saga por meio do parâmetro action:
 function* asyncAddTodo(action) {
-  console.log('addTodo');
-  yield put({ type: 'ADD_TODO', payload: { text: action.payload.text } });
+  try {
+    const response = yield call(apiGet, action.payload.text);
+    yield put({ type: 'ADD_TODO', payload: { text: response } });
+  } catch (err) {
+    yield put({ type: 'FAILURE_TODO_LIST' });
+  }
 }
 
 export default function* root() {
