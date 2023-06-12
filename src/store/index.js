@@ -12,7 +12,25 @@ const store = createStore(
   }),
   applyMiddleware(sagaMiddleware),
 );
-
 sagaMiddleware.run(rootSaga);
 
 export default store;
+
+
+
+
+
+// import { createStore, combineReducers, applyMiddleware } from 'redux';
+// import createSagaMiddleware from 'redux-saga';
+
+// import todos from './reducer';
+
+
+// const store = createStore(
+//   combineReducers({
+//     todos,
+//   }),
+// );
+
+
+// export default store;

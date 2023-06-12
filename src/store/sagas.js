@@ -16,9 +16,9 @@ function apiGet(text, length) {
 
 function* getTodoList() {
   try {
-    const response = yield call(apiGet);
+    const response = yield call(apiGet); // call é usado para chamar funções que retornam promises
 
-    yield put({ type: 'SUCCESS_TODO_LIST', payload: { data: response } });
+    yield put({ type: 'SUCCESS_TODO_LIST', payload: { data: response } }); // put é usado para disparar uma action
   } catch (err) {
     yield put({ type: 'FAILURE_TODO_LIST' });
   }
@@ -26,6 +26,6 @@ function* getTodoList() {
 
 export default function* root() {
   yield [
-    takeLatest('REQUEST_TODO_LIST', getTodoList),
+    takeLatest('REQUEST_TODO_LIST', getTodoList), // takeLatest é usado para pegar apenas a última chamada
   ];
 }
